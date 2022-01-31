@@ -1,0 +1,17 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:alpine'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: vapostoredb
+    networks:
+      - local-bridge
+
+networks:
+  local-bridge:
+    external: true
+    driver: local-bridge

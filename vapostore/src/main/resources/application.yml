@@ -1,0 +1,39 @@
+micronaut:
+  application:
+    name: vapostore
+  server:
+    cors:
+      enabled: true
+  security:
+    enabled: true
+    authentication: bearer
+    redirect:
+      login-sucess: "/store"
+    endpoints:
+      login:
+        path: "/api/login"
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              # Não utilize senhas em plain_text em arquivos de configuração.
+              # Utilize variáveis de ambiente e quando possível, cofres de senha (SECRET MANAGER).
+              secret: '"${JWT_SECRET:EiIYT4frXqmqgGZ+K2dyMRjg7Wnw43JGaHKfI7Ir+9g/9k2mpul86CGZ7lee8VZTI74=}"'
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/vapostoredb
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: "123456"
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show-sql: true
